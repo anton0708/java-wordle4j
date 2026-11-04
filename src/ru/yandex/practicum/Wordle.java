@@ -16,5 +16,6 @@ import java.nio.charset.StandardCharsets;
 public class Wordle {
 
     public static void main(String[] args) {
+
     }
 }
