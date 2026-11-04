@@ -1,4 +1,5 @@
 package ru.yandex.practicum;
+import java.io.PrintWriter;
 
 /*
 этот класс содержит в себе всю рутину по работе с файлами словарей и с кодировками
@@ -6,4 +7,5 @@ package ru.yandex.practicum;
     на выходе должен быть класс WordleDictionary
  */
 public class WordleDictionaryLoader {
+
 }
