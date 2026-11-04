@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class WordleDictionary {
 
-    private static int WORD_LENGHT = 5;
+    public static int WORD_LENGHT = 5;
 
     private List<String> words;
 
