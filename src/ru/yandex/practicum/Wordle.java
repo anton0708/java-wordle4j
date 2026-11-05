@@ -34,7 +34,7 @@ public class Wordle {
         }
     }
 
-    private static void play(WordleGame game) {
+    static void play(WordleGame game) {
 
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
