@@ -32,8 +32,6 @@ public class WordleGame {
 
     private int stepsLeft = MAX_STEPS;
 
-    private final Set<String> suggested = new HashSet<>();
-
     public WordleGame(WordleDictionary dictionary, PrintWriter log) {
         this(dictionary, log, dictionary.getRandomWord());
     }
@@ -83,11 +81,11 @@ public class WordleGame {
         if (!WordleDictionary.isValidFormat(word)) {
             throw new InvalidWordException("Нужно ввести слово из " + WordleDictionary.WORD_LENGHT + " русских букв");
         }
-        if (!dictionary.contains(word)) {
+        if (dictionary.contains(word)) {
             throw new WordNotFoundInDictionaryException(word);
         }
 
-        String hint = computeHint(word, answer);
+        String hint = computeHint(word);
 
         stepsLeft--;
         guesses.add(word);
@@ -101,7 +99,7 @@ public class WordleGame {
         return hint;
     }
 
-        static String computeHint(String guess, String answer) {
+        private String computeHint(String guess) {
             int n = answer.length();
 
             char[] result = new char[n];
@@ -132,55 +130,4 @@ public class WordleGame {
 
 
         }
-
-    public String suggestWord() {
-
-        if (isFinished()) {
-            throw new IllegalStateException("Игра уже завершена");
-        }
-
-        String fresh = null;
-        String anyFit = null;
-
-        for (String candidate : dictionary.getWords()) {
-
-            if (guesses.contains(candidate)) {
-                continue;
-            }
-            if (!fitsAllHints(candidate)) {
-                continue;
-            }
-            if (anyFit == null) {
-                anyFit = candidate;
-            }
-            if (!suggested.contains(candidate)) {
-                fresh = candidate;
-                break;
-            }
-        }
-
-        if (anyFit == null) {
-            throw new IllegalStateException("Не найдено ни одного слова, подходящего к подсказкам");
-        }
-
-        if (fresh == null) {
-            suggested.clear();
-            fresh = anyFit;
-        }
-
-        suggested.add(fresh);
-        log.println("Подсказка компьютера: " + fresh);
-        return fresh;
-    }
-
-    private boolean fitsAllHints(String candidate) {
-        for (int i = 0; i < guesses.size(); i++) {
-            String expected = hints.get(i);
-            String actual = computeHint(guesses.get(i), candidate);
-            if (!actual.equals(expected)) {
-                return false;
-            }
-        }
-        return true;
-    }
     }

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+
 public class Wordle {
 
     private static final String DICTIONARY_FILE = "words_ru.txt";
@@ -24,7 +25,6 @@ public class Wordle {
                 play(game);
 
             } catch (Exception e) {
-
                 e.printStackTrace(log);
                 System.out.println("Произошла ошибка, подробности смотрите в файле " + LOG_FILE);
             }
@@ -34,7 +34,7 @@ public class Wordle {
         }
     }
 
-    static void play(WordleGame game) {
+    private static void play(WordleGame game) {
 
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
@@ -47,11 +47,12 @@ public class Wordle {
             String input = scanner.nextLine();
 
             if (input.isBlank()) {
-                System.out.println("Подсказка: " + game.suggestWord());
+                System.out.println("Введите слово");
                 continue;
             }
 
             try {
+
                 String hint = game.makeMove(input);
                 System.out.println("> " + hint);
 
