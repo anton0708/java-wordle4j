@@ -17,19 +17,16 @@ public class Wordle {
         try (PrintWriter log = new PrintWriter(
                 new FileWriter(LOG_FILE, StandardCharsets.UTF_8), true)) {
 
-            try {
-                WordleDictionaryLoader loader = new WordleDictionaryLoader(log);
-                WordleDictionary dictionary = loader.load(DICTIONARY_FILE);
+            WordleDictionaryLoader loader = new WordleDictionaryLoader(log);
+            WordleDictionary dictionary = loader.load(DICTIONARY_FILE);
 
-                WordleGame game = new WordleGame(dictionary, log);
-                play(game);
-
-            } catch (Exception e) {
-                e.printStackTrace(log);
-                System.out.println("Произошла ошибка, подробности смотрите в файле " + LOG_FILE);
-            }
+            WordleGame game = new WordleGame(dictionary, log);
+            play(game);
 
         } catch (IOException e) {
+            System.out.println("Произошла ошибка, подробности смотрите в файле " + LOG_FILE);
+
+        } catch (Exception e) {
             System.out.println("Не удалось создать лог-файл: " + e.getMessage());
         }
     }

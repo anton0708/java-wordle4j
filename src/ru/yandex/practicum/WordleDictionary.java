@@ -11,15 +11,12 @@ public class WordleDictionary {
 
     public static int WORD_LENGHT = 5;
 
-    private List<String> words;
-
     private final Set<String> wordSet;
 
     private final Random random = new Random();
 
     public WordleDictionary(Collection<String> words) {
-        this.words = new ArrayList<>(words);
-        this.wordSet = new HashSet<>(words);
+        this.wordSet = new LinkedHashSet<>(words);
     }
 
     public static String normalize(String word) {
@@ -41,19 +38,20 @@ public class WordleDictionary {
     }
 
     public int size() {
-        return words.size();
+        return wordSet.size();
     }
 
     public List<String> getWords() {
-        return Collections.unmodifiableList(words);
+        return Collections.unmodifiableList(new ArrayList<>(wordSet));
     }
 
     public String getRandomWord() {
-        if (words.isEmpty()) {
+        if (wordSet.isEmpty()) {
             throw new IllegalStateException("Словарь пуст");
         }
 
-        return words.get(random.nextInt(words.size()));
+        List<String> list = new ArrayList<>(wordSet);
+        return list.get(random.nextInt(list.size()));
     }
 
 }

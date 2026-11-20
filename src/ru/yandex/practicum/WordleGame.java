@@ -81,10 +81,6 @@ public class WordleGame {
         guesses.add(word);
         hints.add(hint);
         log.println("Ход: " + word + " -> " + hint + ", осталось попыток: " + stepsLeft);
-
-        if (stepsLeft < 0) {
-            throw new IllegalStateException("Количество попыток стало отрицательным");
-        }
         return hint;
     }
 
